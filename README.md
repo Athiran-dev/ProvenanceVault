@@ -42,29 +42,7 @@ When sensitive, classified documents are distributed to multiple authorized reci
 
 ## 🏗 Architecture Diagram
 
-```text
-┌─────────────────────────────────────────────────────┐
-│                    ADMIN (Browser)                   │
-│  Upload PDF → Select Recipients → Distribute         │
-└──────────────────────┬──────────────────────────────┘
-                       │ HTTP
-┌──────────────────────▼──────────────────────────────┐
-│              EXPRESS BACKEND (:5000)                  │
-│                                                      │
-│  ┌──────────┐  ┌─────────┐  ┌──────────────────┐   │
-│  │  pqc.js  │  │ aes.js  │  │  watermark.js    │   │
-│  │ ML-KEM   │  │ AES-256 │  │  PDF Render      │   │
-│  │ ML-DSA   │  │   GCM   │  │  Mode 3          │   │
-│  └──────────┘  └─────────┘  └──────────────────┘   │
-│                                                      │
-│  ┌──────────────────┐  ┌───────────────────────┐    │
-│  │  PostgreSQL      │  │  Hardhat Blockchain   │    │
-│  │  (local :5433)   │  │  (local :8545)        │    │
-│  │  4 tables        │  │  DecryptionLedger.sol  │    │
-│  └──────────────────┘  └───────────────────────┘    │
-└─────────────────────────────────────────────────────┘
-         ALL LOCAL — WORKS FULLY OFFLINE
-```
+![Architecture Diagram](./architecture.png)
 
 ---
 
